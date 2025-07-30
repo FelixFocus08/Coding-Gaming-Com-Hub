@@ -13,7 +13,7 @@ const projectIdeas = [
     tags: ["React", "Frontend", "Framer Motion", "UI/UX"],
     imgSrc: "https://images.unsplash.com/photo-1555099962-4199c345e546",
     imgAlt: "Laptop mit Code für eine Portfolio-Website",
-    tutorialLink: "/tutorials/portfolio", // Beispiel Link zu eigenem Tutorial
+    tutorialLink: "https://info.codecast.io/blog/create-a-portfolio-website-with-only-html-css?utm_source=chatgpt.com", // Beispiel Link zu eigenem Tutorial
   },
   {
     title: "Aufgaben-Manager (To-Do App)",
@@ -33,7 +33,7 @@ const projectIdeas = [
     tags: ["API", "Async JavaScript", "Datenvisualisierung", "Frontend"],
     imgSrc: "https://images.unsplash.com/photo-1530569677193-16817f82dff0",
     imgAlt: "Smartphone-Bildschirm mit einer Wettervorhersage-App",
-    tutorialLink: "/tutorials/weather-app",
+    tutorialLink: "https://www.geeksforgeeks.org/javascript/build-a-weather-app-in-html-css-javascript/?utm_source=chatgpt.com",
   },
   {
     title: "E-Commerce Produktseite",
@@ -43,7 +43,7 @@ const projectIdeas = [
     tags: ["React", "E-Commerce", "UI Design", "State Management"],
     imgSrc: "https://images.unsplash.com/photo-1585150478350-14ac2595319a",
     imgAlt: "Nahaufnahme eines Online-Shops auf einem Tablet",
-    tutorialLink: "/tutorials/ecommerce-product-page",
+    tutorialLink: "https://university.webflow.com/videos/design-your-store?utm_source=chatgpt.com",
   },
 ];
 
