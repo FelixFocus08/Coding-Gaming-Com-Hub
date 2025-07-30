@@ -48,18 +48,6 @@ const filteredTickets = tickets.filter(ticket => {
     setUsers(getAllUsers()); 
   };
 
-  const handleSaveTicketChanges = () => {
-    if (!selectedTicket) return;
-    const updatedTickets = tickets.map(t => 
-      t.id === selectedTicket.id ? { ...t, ...editTicketData, updatedAt: new Date().toISOString() } : t
-    );
-    setTickets(updatedTickets);
-    localStorage.setItem('tickets', JSON.stringify(updatedTickets));
-    toast({ title: "Ticket aktualisiert", description: `Ticket #${selectedTicket.id} wurde erfolgreich bearbeitet.` });
-    setIsEditDialogOpen(false);
-    setSelectedTicket(null);
-  };
-
   const handleEditTicket = (ticket) => {
   setSelectedTicket(ticket);
   setEditTicketData({ 
@@ -72,6 +60,17 @@ const filteredTickets = tickets.filter(ticket => {
   setIsEditDialogOpen(true);
 };
 
+const handleSaveTicketChanges = () => {
+    if (!selectedTicket) return;
+    const updatedTickets = tickets.map(t => 
+      t.id === selectedTicket.id ? { ...t, ...editTicketData, updatedAt: new Date().toISOString() } : t
+    );
+    setTickets(updatedTickets);
+    localStorage.setItem('tickets', JSON.stringify(updatedTickets));
+    toast({ title: "Ticket aktualisiert", description: `Ticket #${selectedTicket.id} wurde erfolgreich bearbeitet.` });
+    setIsEditDialogOpen(false);
+    setSelectedTicket(null);
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
