@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 
 
 const AdminPage = () => {
+  const [newMessage, setNewMessage] = useState('');
   const { user, getAllUsers, updateUserRole } = useAuth();
   const [users, setUsers] = useState([]);
   const [tickets, setTickets] = useState([]);
@@ -47,12 +48,6 @@ const filteredTickets = tickets.filter(ticket => {
     setUsers(getAllUsers()); 
   };
 
-  const handleEditTicket = (ticket) => {
-    setSelectedTicket(ticket);
-    setEditTicketData({ subject: ticket.subject, message: ticket.message, status: ticket.status });
-    setIsEditDialogOpen(true);
-  };
-
   const handleSaveTicketChanges = () => {
     if (!selectedTicket) return;
     const updatedTickets = tickets.map(t => 
@@ -64,6 +59,19 @@ const filteredTickets = tickets.filter(ticket => {
     setIsEditDialogOpen(false);
     setSelectedTicket(null);
   };
+
+  const handleEditTicket = (ticket) => {
+  setSelectedTicket(ticket);
+  setEditTicketData({ 
+    subject: ticket.subject, 
+    message: ticket.message, 
+    status: ticket.status,
+    messages: ticket.messages || []  // Nachrichten laden
+  });
+  setNewMessage(''); // Eingabefeld leeren
+  setIsEditDialogOpen(true);
+};
+
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -221,44 +229,112 @@ const filteredTickets = tickets.filter(ticket => {
       </Tabs>
 
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="sm:max-w-[525px]">
-          <DialogHeader>
-            <DialogTitle>Ticket #{selectedTicket?.id} bearbeiten</DialogTitle>
-            <DialogDescription>
-              Ändere den Betreff, die Nachricht oder den Status des Tickets.
-            </DialogDescription>
-          </DialogHeader>
-          {selectedTicket && (
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-subject" className="text-right">Betreff</Label>
-                <Input id="edit-subject" value={editTicketData.subject} onChange={(e) => setEditTicketData({...editTicketData, subject: e.target.value })} className="col-span-3" />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-message" className="text-right">Nachricht</Label>
-                <Textarea id="edit-message" value={editTicketData.message} onChange={(e) => setEditTicketData({...editTicketData, message: e.target.value })} className="col-span-3" rows={5} />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-status" className="text-right">Status</Label>
-                <Select value={editTicketData.status} onValueChange={(value) => setEditTicketData({...editTicketData, status: value })}>
-                  <SelectTrigger className="col-span-3">
-                    <SelectValue placeholder="Status auswählen" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="offen">Offen</SelectItem>
-                    <SelectItem value="in_bearbeitung">In Bearbeitung</SelectItem>
-                    <SelectItem value="geschlossen">Geschlossen</SelectItem>
-                  </SelectContent>
-                </Select>
+  <DialogContent className="sm:max-w-[525px]">
+    <DialogHeader>
+      <DialogTitle>Ticket #{selectedTicket?.id} bearbeiten</DialogTitle>
+      <DialogDescription>
+        Ändere den Betreff, die Nachricht oder den Status des Tickets. Nutze den Chat, um Nachrichten zu senden.
+      </DialogDescription>
+    </DialogHeader>
+    {selectedTicket && (
+      <div className="grid gap-4 py-4">
+        {/* Betreff */}
+        <div className="grid grid-cols-4 items-center gap-4">
+          <Label htmlFor="edit-subject" className="text-right">Betreff</Label>
+          <Input 
+            id="edit-subject" 
+            value={editTicketData.subject} 
+            onChange={(e) => setEditTicketData({...editTicketData, subject: e.target.value })}
+            className="col-span-3" 
+          />
+        </div>
+
+        {/* Nachricht (optional, kannst du auch weglassen, wenn nur Chat genutzt werden soll) */}
+        <div className="grid grid-cols-4 items-center gap-4">
+          <Label htmlFor="edit-message" className="text-right">Nachricht</Label>
+          <Textarea 
+            id="edit-message" 
+            value={editTicketData.message} 
+            onChange={(e) => setEditTicketData({...editTicketData, message: e.target.value })} 
+            className="col-span-3" 
+            rows={3} 
+          />
+        </div>
+
+        {/* Status */}
+        <div className="grid grid-cols-4 items-center gap-4">
+          <Label htmlFor="edit-status" className="text-right">Status</Label>
+          <Select 
+            value={editTicketData.status} 
+            onValueChange={(value) => setEditTicketData({...editTicketData, status: value })}
+          >
+            <SelectTrigger className="col-span-3">
+              <SelectValue placeholder="Status auswählen" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="offen">Offen</SelectItem>
+              <SelectItem value="in_bearbeitung">In Bearbeitung</SelectItem>
+              <SelectItem value="geschlossen">Geschlossen</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Chat-Verlauf */}
+        <div className="max-h-64 overflow-y-auto p-4 bg-gray-50 rounded-md mb-4 col-span-4">
+          {(editTicketData.messages || []).map(msg => (
+            <div 
+              key={msg.id} 
+              className={`mb-2 ${msg.sender === "Admin" ? "text-right" : "text-left"}`}
+            >
+              <p className={`inline-block px-3 py-2 rounded-lg ${msg.sender === "Admin" ? "bg-blue-400 text-white" : "bg-gray-300 text-black"}`}>
+                {msg.text}
+              </p>
+              <div className="text-xs text-muted-foreground">
+                {new Date(msg.timestamp).toLocaleString("de-DE")}
               </div>
             </div>
-          )}
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>Abbrechen</Button>
-            <Button onClick={handleSaveTicketChanges}>Änderungen speichern</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          ))}
+        </div>
+
+        {/* Neue Nachricht schreiben */}
+        <div className="flex gap-2 col-span-4">
+          <Textarea
+            placeholder="Neue Nachricht eingeben..."
+            value={newMessage}
+            onChange={e => setNewMessage(e.target.value)}
+            rows={2}
+            className="flex-grow"
+          />
+          <Button
+            disabled={!newMessage.trim()}
+            onClick={() => {
+              if (!newMessage.trim()) return;
+
+              const updatedMessages = [
+                ...(editTicketData.messages || []),
+                {
+                  id: crypto.randomUUID(),
+                  sender: "Admin",
+                  text: newMessage.trim(),
+                  timestamp: new Date().toISOString(),
+                }
+              ];
+
+              setEditTicketData({ ...editTicketData, messages: updatedMessages });
+              setNewMessage('');
+            }}
+          >
+            Senden
+          </Button>
+        </div>
+      </div>
+    )}
+    <DialogFooter>
+      <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>Abbrechen</Button>
+      <Button onClick={handleSaveTicketChanges}>Änderungen speichern</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
 
     </motion.div>
   );
