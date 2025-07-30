@@ -79,14 +79,13 @@ const CodingLearningPaths = () => {
                 {path.links.map((link) => (
                   <Button
                     key={link.url}
+                    asChild
                     variant="outline"
                     size="sm"
-                    as="a"
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {link.label}
+                    >
+                      <a href={link.url} target="_blank" rel="noopener noreferrer">
+                        {link.label}
+                      </a>
                   </Button>
                 ))}
               </div>

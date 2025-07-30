@@ -75,9 +75,20 @@ const CodingProjectIdeas = () => {
             </div>
           </CardContent>
           <CardFooter className="p-6 pt-0 border-t border-border/30 mt-auto">
-            <Button variant="default" size="sm" className="w-full group/button bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90">
+            <Button
+              asChild
+              variant="default"
+              size="sm"
+              className="w-full group/button bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90"
+              >
+              <a
+              href={project.tutorialLink}
+              target={project.tutorialLink.startsWith('http') ? '_blank' : undefined}
+              rel={project.tutorialLink.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
               <Zap size={16} className="mr-2 transition-transform duration-300 group-hover/button:rotate-[360deg] group-hover/button:scale-125" />
               Projekt starten
+              </a>
             </Button>
           </CardFooter>
         </Card>

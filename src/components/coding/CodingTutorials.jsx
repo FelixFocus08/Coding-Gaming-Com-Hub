@@ -78,10 +78,11 @@ const CodingTutorials = () => {
                 <span className="flex items-center"><BarChart2 size={14} className="mr-1" /> {item.level}</span>
               </div>
               <Button variant="ghost" size="sm" asChild className="group-hover:text-primary">
-                <Link to={item.link}>
+                <a href={item.link} target="_blank" rel="noopener noreferrer" className="flex items-center">
                   Details <ArrowRight size={16} className="ml-1 transition-transform group-hover:translate-x-1" />
-                </Link>
+                </a>
               </Button>
+
             </div>
           </CardFooter>
         </Card>
