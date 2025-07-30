@@ -11,9 +11,9 @@ const projectIdeas = [
       "Erstelle eine dynamische Portfolio-Website mit React und Framer Motion, um deine Projekte und Fähigkeiten zu präsentieren.",
     difficulty: "Mittel",
     tags: ["React", "Frontend", "Framer Motion", "UI/UX"],
-    imgSrc: "https://images.unsplash.com/photo-1555099962-4199c345e546",
+    imgSrc: "https://cdn.prod.website-files.com/6005d46a9763985a3b529377/61e7164f7e307da1b8a1065a_ld8lv4u9060o6igg284l.png",
     imgAlt: "Laptop mit Code für eine Portfolio-Website",
-    tutorialLink: "https://info.codecast.io/blog/create-a-portfolio-website-with-only-html-css?utm_source=chatgpt.com", // Beispiel Link zu eigenem Tutorial
+    tutorialLink: "https://info.codecast.io/blog/create-a-portfolio-website-with-only-html-css", // Beispiel Link zu eigenem Tutorial
   },
   {
     title: "Aufgaben-Manager (To-Do App)",
@@ -31,9 +31,9 @@ const projectIdeas = [
       "Baue eine Wetter-App, die aktuelle Wetterdaten von einer externen API (z.B. OpenWeatherMap) abruft und ansprechend darstellt.",
     difficulty: "Mittel",
     tags: ["API", "Async JavaScript", "Datenvisualisierung", "Frontend"],
-    imgSrc: "https://images.unsplash.com/photo-1530569677193-16817f82dff0",
+    imgSrc: "https://media.geeksforgeeks.org/wp-content/uploads/20240209142501/Screenshot-2024-02-09-at-14-16-59-GFG-App.png",
     imgAlt: "Smartphone-Bildschirm mit einer Wettervorhersage-App",
-    tutorialLink: "https://www.geeksforgeeks.org/javascript/build-a-weather-app-in-html-css-javascript/?utm_source=chatgpt.com",
+    tutorialLink: "https://www.geeksforgeeks.org/javascript/build-a-weather-app-in-html-css-javascript",
   },
   {
     title: "E-Commerce Produktseite",
@@ -41,9 +41,9 @@ const projectIdeas = [
       "Gestalte eine detaillierte Produktseite für einen fiktiven Online-Shop mit Bildgalerie, Produktvarianten und Warenkorb-Funktionalität (Client-seitig).",
     difficulty: "Fortgeschritten",
     tags: ["React", "E-Commerce", "UI Design", "State Management"],
-    imgSrc: "https://images.unsplash.com/photo-1585150478350-14ac2595319a",
+    imgSrc: "https://cdn.prod.website-files.com/64949e4863d96e26a1da8386/64b9481809e75c1c7f0f5627_5e61310bafff65f6f29d0b1e_5c6d5e6eb328340cee9f739c_maxresdefault-4.webp",
     imgAlt: "Nahaufnahme eines Online-Shops auf einem Tablet",
-    tutorialLink: "https://university.webflow.com/videos/design-your-store?utm_source=chatgpt.com",
+    tutorialLink: "https://university.webflow.com/videos/design-your-store",
   },
 ];
 
