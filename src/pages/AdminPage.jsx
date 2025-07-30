@@ -28,6 +28,20 @@ const AdminPage = () => {
     setTickets(storedTickets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
   }, [getAllUsers]);
 
+  const [search, setSearch] = useState('');
+
+const filteredTickets = tickets.filter(ticket => {
+  const searchLower = search.toLowerCase();
+
+  return (
+    ticket.subject.toLowerCase().includes(searchLower) ||
+    ticket.name.toLowerCase().includes(searchLower) ||
+    ticket.email.toLowerCase().includes(searchLower) ||
+    ticket.category.toLowerCase().includes(searchLower)
+  );
+});
+
+
   const handleRoleChange = (userId, newRole) => {
     updateUserRole(userId, newRole);
     setUsers(getAllUsers()); 
@@ -85,6 +99,14 @@ const AdminPage = () => {
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4 text-gradient">Admin Dashboard</h1>
         <p className="text-lg text-muted-foreground">Verwalte Benutzer, Tickets und mehr.</p>
       </header>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Card><CardContent>Tickets: {tickets.length}</CardContent></Card>
+        <Card><CardContent>Offen: {tickets.filter(t => t.status === 'offen').length}</CardContent></Card>
+        <Card><CardContent>Benutzer: {users.length}</CardContent></Card>
+        <Card><CardContent>Admins: {users.filter(u => u.role === 'admin').length}</CardContent></Card>
+      </div>
+
 
       <Tabs defaultValue="userManagement" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-8">
@@ -153,8 +175,16 @@ const AdminPage = () => {
               <CardDescription>Übersicht und Bearbeitung aller erstellten Tickets.</CardDescription>
             </CardHeader>
             <CardContent>
-              {tickets.length === 0 ? (
-                <p className="text-muted-foreground text-center">Keine Tickets vorhanden.</p>
+              {/* Suchfeld für Tickets */}
+              <Input
+                placeholder="Tickets suchen: Betreff, Name, E-Mail, Kategorie"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="mb-4"
+              />
+
+              {filteredTickets.length === 0 ? (
+                <p className="text-muted-foreground text-center">Keine Tickets gefunden.</p>
               ) : (
                 <Table>
                   <TableHeader>
@@ -169,7 +199,7 @@ const AdminPage = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {tickets.map((ticket) => (
+                    {filteredTickets.map((ticket) => (
                       <TableRow key={ticket.id}>
                         <TableCell>{ticket.id}</TableCell>
                         <TableCell className="font-medium">{ticket.subject}</TableCell>

@@ -8,6 +8,18 @@ import { History, GitCommit, PlusCircle, Wrench, Zap } from "lucide-react";
 
 const changelogData = [
   {
+    version: "1.2.1",
+    date: "2025-07-30",
+    title: "Admin-Seite Update & Homepage Verbesserungen",
+    changes: [
+      { type: "new", description: "Admin-Seite hat ein Update mit Suchleiste bekommen" },
+      { type: "improvement", description: "Admin-Seite wurde verbessert" },
+      { type: "improvement", description: "Coding Abschnitte wurden mit Content bestückt" },
+      { type: "improvement", description: "die Partner-Seite wurde auch wieder verbessert" },
+      { type: "fix", description: "Diverse kleinere Bugfixes und Performance-Optimierungen." },
+    ],
+  },
+  {
     version: "1.2.0",
     date: "2025-05-19",
     title: "Neue Features & UI-Verbesserungen",

@@ -17,7 +17,7 @@ const botResponses = {
   "gaming": "Gaming ist super! Hast du eine spezifische Frage zu einem Spiel, Hardware oder Einstellungen?",
   "coding": "Coding kann knifflig sein. Suchst du nach Tutorials, Ressourcen oder hast du ein spezifisches Programmierproblem?",
   "tipps": "Wir haben viele Tipps & Tricks! Zu welchem Thema suchst du Ratschläge: Gaming, Coding, Hardware oder Software?",
-  "discord": "Unseren Discord-Server findest du hier: https://discord.gg/6ZPskNPHXC. Tritt gerne bei!",
+  "discord": "Unseren Discord-Server findest du hier: https://discord.gg/X2cFXTgvr6. Tritt gerne bei!",
   "default": "Das habe ich leider nicht verstanden. Kannst du es anders formulieren? Du kannst auch 'Hilfe' eingeben, um Optionen zu sehen."
 };
 
